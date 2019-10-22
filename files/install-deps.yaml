@@ -1,0 +1,14 @@
+---
+- name: Install dependencies for sentinel-downloader
+  hosts: all
+  tasks:
+  - name: Install all RPM/python packages.
+    dnf:
+      name:
+      - git # setuptools-scm
+      state: present
+  - name: Install pip deps
+    pip:
+      name:
+        - sentinelhub
+      executable: pip3
