@@ -1,0 +1,8 @@
+title: Sentinel Downloader
+email: info@zaitra.io
+description: >- # this means to ignore newlines until "baseurl:"
+  Knižnica a nástroj volaný z príkazového riadku na jednoduché sťahovanie satelitných dát zo www.sentinel-hub.com.
+url: "zaitra.github.io/"
+
+# Build settings
+theme: "jekyll-theme-cayman"
