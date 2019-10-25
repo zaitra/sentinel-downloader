@@ -10,11 +10,12 @@ from sentinel_downloader.utils import save_image
 
 
 class SentinelDownloaderAPI:
-
     def __init__(self, config_path=None):
         self.config = Config.get_config(config_path)
         self.bounding_box = BBox(bbox=self.config.bounding_box, crs=CRS.WGS84)
-        self.custom_url_params = {CustomUrlParam.SHOWLOGO: False}  # remove Sentinel logo
+        self.custom_url_params = {
+            CustomUrlParam.SHOWLOGO: False
+        }  # remove Sentinel logo
 
     def download(self):
         for time in self.config.times:
@@ -27,13 +28,16 @@ class SentinelDownloaderAPI:
             self.download_image(time, path)
 
     def download_image(self, time, path=None):
-        request = WmsRequest(layer=self.config.layer,
-                                            bbox=self.bounding_box,
-                                            time=time,  # download from this time ranges
-                                            maxcc=self.config.max_cloud_percentage,
-                                            width=self.config.width, height=self.config.height,  # photo dimensions
-                                            custom_url_params=self.custom_url_params,
-                                            instance_id=self.config.instance_id)
+        request = WmsRequest(
+            layer=self.config.layer,
+            bbox=self.bounding_box,
+            time=time,  # download from this time ranges
+            maxcc=self.config.max_cloud_percentage,
+            width=self.config.width,
+            height=self.config.height,  # photo dimensions
+            custom_url_params=self.custom_url_params,
+            instance_id=self.config.instance_id,
+        )
 
         if request.get_data():
             images = request.get_data()
@@ -45,4 +49,4 @@ class SentinelDownloaderAPI:
 
     def _get_year_from_time(self, time):
         # FIXME this is workaround, this can be done by converting to datetime
-        return time.split('-')[0]
+        return time.split("-")[0]

@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 
 
 class Config:
-
     def __init__(self):
         self.debug = False
         self.instance_id = ""
@@ -30,9 +29,7 @@ class Config:
             Draft4Validator(CONFIG_SCHEMA).validate(raw_dict)
         except ValidationError as ex:
             logger.debug(f"{pformat(raw_dict)}")
-            raise Exception(
-                f"Provided configuration is not valid: {ex}."
-            )
+            raise Exception(f"Provided configuration is not valid: {ex}.")
 
     @staticmethod
     def get_from_dict(raw_dict: dict, validate=True) -> "Config":

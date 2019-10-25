@@ -21,7 +21,7 @@ def show_image(image_array=None, path=None, mode=cv2.IMREAD_COLOR):
                  Alternatively, we can pass integer value 1 for this flag.
                  cv2.IMREAD_GRAYSCALE: It specifies to load an image in grayscale mode.
                  Alternatively, we can pass integer value 0 for this flag.
-                 cv2.IMREAD_UNCHANGED: It specifies to load an image as such including alpha channel.
+                 cv2.IMREAD_UNCHANGED: It specifies to load an image as such including alpha channel
                  Alternatively, we can pass integer value -1 for this flag.
     :return: None
     """
@@ -33,7 +33,7 @@ def show_image(image_array=None, path=None, mode=cv2.IMREAD_COLOR):
         cv2.imshow("image", image_array)
 
     if path:
-        image_array = cv2.imread('watch.jpg', mode)
+        image_array = cv2.imread("watch.jpg", mode)
         cv2.imshow("image", image_array)
 
 
@@ -46,8 +46,8 @@ def load_image(path, mode=cv2.IMREAD_COLOR):
                  Alternatively, we can pass integer value 1 for this flag.
                  cv2.IMREAD_GRAYSCALE: It specifies to load an image in grayscale mode.
                  Alternatively, we can pass integer value 0 for this flag.
-                 cv2.IMREAD_UNCHANGED: It specifies to load an image as such including alpha channel.
+                 cv2.IMREAD_UNCHANGED: It specifies to load an image as such including alpha channel
                  Alternatively, we can pass integer value -1 for this flag.
     :return: Numpy array
     """
-    return cv2.imread('watch.jpg', mode)
+    return cv2.imread("watch.jpg", mode)

@@ -9,6 +9,6 @@ CONFIG_SCHEMA = {
         "width": {"type": "integer"},
         "height": {"type": "integer"},
         "max_cloud_percentage": {"type": "number"},
-        "images_dir": {"type": "string"}
+        "images_dir": {"type": "string"},
     },
 }
