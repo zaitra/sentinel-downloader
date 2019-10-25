@@ -1,6 +1,9 @@
 import logging
 import click
 
+from sentinel_downloader.api.api import SentinelDownloaderAPI
+from sentinel_downloader.config import Config
+
 logger = logging.getLogger(__name__)
 
 
@@ -10,4 +13,5 @@ def download():
     Download image(s) from sentinel-hub
     """
 
-    pass
+    api = SentinelDownloaderAPI()
+    api.download()

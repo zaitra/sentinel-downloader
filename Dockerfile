@@ -8,6 +8,10 @@ ENV LANG=en_US.UTF-8 \
 
 RUN dnf install -y ansible
 
+RUN mkdir /data
+
+VOLUME /data
+
 COPY files/install-deps.yaml /src/files/
 
 # Install dependencies. If you want to add any please do so in files/install-deps.yaml

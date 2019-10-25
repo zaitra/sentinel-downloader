@@ -6,6 +6,7 @@
     dnf:
       name:
       - git # setuptools-scm
+      - opencv*
       state: present
   - name: Install pip deps
     pip:
