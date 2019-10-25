@@ -56,8 +56,8 @@ class Config:
         return config
 
     @staticmethod
-    def get_config() -> "Config":
-        directory = Path.cwd() / "files"
+    def get_config(path=None) -> "Config":
+        directory = Path(path) or (Path.cwd() / "files")
         config_file_name_full = directory / CONFIG_FILE_NAME
         logger.debug(f"Loading config from directory: {directory}")
 

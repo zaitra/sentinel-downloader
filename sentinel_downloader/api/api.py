@@ -11,8 +11,8 @@ from sentinel_downloader.utils import save_image
 
 class SentinelDownloaderAPI:
 
-    def __init__(self):
-        self.config = Config.get_config()
+    def __init__(self, config_path=None):
+        self.config = Config.get_config(config_path)
         self.bounding_box = BBox(bbox=self.config.bounding_box, crs=CRS.WGS84)
         self.custom_url_params = {CustomUrlParam.SHOWLOGO: False}  # remove Sentinel logo
 
