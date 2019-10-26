@@ -1,0 +1,19 @@
+debug: true
+instance_id: "XXX"
+layer: "layer1"
+times:
+  -  ["2015-05-01", "2015-08-30"]
+  -  ["2016-05-01", "2016-08-30"]
+  -  ["2017-05-01", "2017-08-30"]
+  -  ["2018-05-01", "2018-08-30"]
+  -  ["2019-05-01", "2019-08-30"]
+
+# area of interest. Coordinates representing top left x,y and right bottom x,y
+bounding_box: [14.42, 50.42, 14.42, 50.42]
+
+width: 42
+height: 42
+
+max_cloud_percentage: 0.42
+
+images_dir: "/tmp/images/"

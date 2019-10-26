@@ -11,4 +11,13 @@ CONFIG_SCHEMA = {
         "max_cloud_percentage": {"type": "number"},
         "images_dir": {"type": "string"},
     },
+    "required": [
+        "instance_id",
+        "layer",
+        "times",
+        "bounding_box",
+        "width",
+        "height",
+        "images_dir",
+    ],
 }

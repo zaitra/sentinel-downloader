@@ -1,0 +1,13 @@
+---
+- name: This is a recipe for a container image where sentinel-downloader tests will run
+  hosts: all
+  tasks:
+  - name: Install test RPM dependencies
+    dnf:
+      name:
+      - python3-flexmock
+      - python3-pytest
+      - python3-pytest-cov
+      - make
+      - findutils
+      state: present
