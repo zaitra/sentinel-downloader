@@ -15,7 +15,7 @@ jobs:
     - stage: pre-commit
       name: "Run pre-commit checks."
       script: pre-commit run --all-files
-    - stage: image
+    - stage: build
       name: "Image build."
       script: make build
     - stage: test
