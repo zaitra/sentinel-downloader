@@ -1,6 +1,6 @@
 IMAGE := docker.io/zaitra/sentinel-downloader
 TEST_IMAGE := docker.io/zaitra/sentinel-downloader-tests
-TEST_TARGET := ./tests/unit ./tests/integration/
+TEST_TARGET := ./tests/
 
 build: files/install-deps.yaml
 	docker build --rm -t $(IMAGE) .
