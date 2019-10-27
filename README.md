@@ -25,7 +25,7 @@ Configuration file is described in configuration section.
 If you want just try it out you can easily do it using docker:
 
 ```bash
-$ docker run -it --rm -v /tmp/images:/tmp/images $(IMAGE) bash -c "sentinel-downloader download -c /src/files/.sd.yaml"
+$ docker run -it --rm -v /tmp/images:/tmp/images $(IMAGE) bash -c "sentinel-downloader download -c /src/.sd.yaml"
 ```
 
 **Note:** You have to have your `sentinel-downloader` config `.sd.yaml` in the root directory of this project.

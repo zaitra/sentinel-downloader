@@ -12,17 +12,17 @@ class SentinelDownloaderAPI:
         self.bounding_box = BBox(bbox=self.config.bounding_box, crs=CRS.WGS84)
         self.custom_url_params = {
             CustomUrlParam.SHOWLOGO: False
-        }  # remove Sentinel logo
+        }  # remove SentinelHub logo
 
     def download(self):
         for time in self.config.times:
-            # FIXME ranges has to be all from the different years right now
-            # this is just folder path for one time range
             path = (
                 self.config.image_dir
                 + self.config.layer
                 + "/"
-                + self._get_year_from_time(time[0])
+                + time[0]
+                + "_"
+                + time[1]
                 + "/"
             )
             if not os.path.exists(path):
@@ -46,15 +46,12 @@ class SentinelDownloaderAPI:
             images = request.get_data()
             for index, image in enumerate(images):
                 if path:
-                    self._save_image(image, path + str(index) + ".png")
+                    SentinelDownloaderAPI._save_image(image, path + str(index) + ".png")
                 else:
                     raise Exception("Path to image folder does not exists!")
 
-    def _get_year_from_time(self, time):
-        # FIXME this is workaround, this can be done by converting to datetime
-        return time.split("-")[0]
-
-    def _save_image(self, image_array, path):
+    @staticmethod
+    def _save_image(image_array, path):
         """
         save numpy array image to specific path
         :param image_array: Numpy array
