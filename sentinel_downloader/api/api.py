@@ -1,12 +1,9 @@
 import os
+import cv2
 
 from sentinelhub import WmsRequest, CustomUrlParam, CRS, BBox
 
 from sentinel_downloader.config import Config
-from sentinel_downloader.utils import save_image
-
-# from sentinel_downloader.api.api import SentinelDownloaderAPI
-# api = SentinelDownloaderAPI()
 
 
 class SentinelDownloaderAPI:
@@ -21,7 +18,14 @@ class SentinelDownloaderAPI:
         for time in self.config.times:
             # FIXME ranges has to be all from the different years right now
             # this is just folder path for one time range
-            path = self.config.image_dir + "/" + self._get_year_from_time(time[0]) + "/"
+            path = (
+                self.config.image_dir
+                + "/"
+                + self.config.layer
+                + "/"
+                + self._get_year_from_time(time[0])
+                + "/"
+            )
             if not os.path.exists(path):
                 os.mkdir(path)
             time = tuple(time)
@@ -43,10 +47,19 @@ class SentinelDownloaderAPI:
             images = request.get_data()
             for index, image in enumerate(images):
                 if path:
-                    save_image(image, path + str(index) + ".png")
+                    self._save_image(image, path + str(index) + ".png")
                 else:
                     raise Exception("Path to image folder does not exists!")
 
     def _get_year_from_time(self, time):
         # FIXME this is workaround, this can be done by converting to datetime
         return time.split("-")[0]
+
+    def _save_image(self, image_array, path):
+        """
+        save numpy array image to specific path
+        :param image_array: Numpy array
+        :param path: Path to save
+        :return:
+        """
+        cv2.imwrite(path, image_array)
