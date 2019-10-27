@@ -8,7 +8,7 @@ build: files/install-deps.yaml
 run-in-container: build
 	docker run -it --rm -v /tmp/images:/tmp/images $(IMAGE) bash -c "sentinel-downloader download -c /src/files"
 
-test-image: files/install-deps.yaml files/recipe-tests.yaml
+test-image: build
 	docker build --rm -t $(TEST_IMAGE) -f Dockerfile.tests .
 
 check:

@@ -1,0 +1,9 @@
+language: python
+
+services:
+  - docker
+
+before_install:
+- sudo apt-get -y install make
+
+script: make check-in-container
