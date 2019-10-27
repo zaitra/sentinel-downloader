@@ -25,11 +25,10 @@ Configuration file is described in configuration section.
 If you want just try it out you can easily do it using docker:
 
 ```bash
-$ make build
 $ docker run -it --rm -v /tmp/images:/tmp/images $(IMAGE) bash -c "sentinel-downloader download -c /src/files/.sd.yaml"
 ```
 
-**Note:** This will build image locally and you have to have your `sentinel-downloader` config in the ./files/.sd.yaml.
+**Note:** This will build image locally and you have to have your `sentinel-downloader` config `.sd.yaml` in the root directory of this project.
 
 # Configuration
 
