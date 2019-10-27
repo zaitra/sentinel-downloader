@@ -28,7 +28,7 @@ If you want just try it out you can easily do it using docker:
 $ docker run -it --rm -v /tmp/images:/tmp/images $(IMAGE) bash -c "sentinel-downloader download -c /src/files/.sd.yaml"
 ```
 
-**Note:** This will build image locally and you have to have your `sentinel-downloader` config `.sd.yaml` in the root directory of this project.
+**Note:** You have to have your `sentinel-downloader` config `.sd.yaml` in the root directory of this project.
 
 # Configuration
 
