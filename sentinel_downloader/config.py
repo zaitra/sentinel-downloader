@@ -54,8 +54,14 @@ class Config:
 
     @staticmethod
     def get_config(path=None) -> "Config":
-        directory = Path(path) or (Path.cwd() / "files")
-        config_file_name_full = directory / CONFIG_FILE_NAME
+        directory = Path(path) or Path.cwd()
+        if not path:
+            # try to find config in current directory with default name
+            config_file_name_full = directory / CONFIG_FILE_NAME
+        else:
+            # full path to config is provided from command line
+            config_file_name_full = directory
+
         logger.debug(f"Loading config from directory: {directory}")
 
         try:
