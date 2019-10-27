@@ -2,7 +2,6 @@ import logging
 import click
 
 from sentinel_downloader.api.api import SentinelDownloaderAPI
-from sentinel_downloader.config import Config
 
 logger = logging.getLogger(__name__)
 
