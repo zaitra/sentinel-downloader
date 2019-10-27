@@ -20,14 +20,13 @@ class SentinelDownloaderAPI:
             # this is just folder path for one time range
             path = (
                 self.config.image_dir
-                + "/"
                 + self.config.layer
                 + "/"
                 + self._get_year_from_time(time[0])
                 + "/"
             )
             if not os.path.exists(path):
-                os.mkdir(path)
+                os.makedirs(path, exist_ok=True)
             time = tuple(time)
             self.download_image(time, path)
 
