@@ -108,3 +108,6 @@ venv.bak/
 
 # Sentinel downloader config
 files/.sd.yaml
+
+# macOS
+.DS_Store

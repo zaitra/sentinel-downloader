@@ -54,6 +54,10 @@ Running tests locally:
 make check
 ```
 
+Running tests in container:
+```
+make check-in-container
+```
 
 ### Makefile
 
