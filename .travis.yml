@@ -5,5 +5,22 @@ services:
 
 before_install:
 - sudo apt-get -y install make
+- pip3 install pre-commit
+- pre-commit install
 
-script: make check-in-container
+jobs:
+  include:
+    - stage: pre-commit
+      name: "Run pre-commit checks."
+      script: pre-commit run --all-files
+    - stage: image
+      name: "Image build."
+      script: make build
+    - stage: test
+      name: "Run tests."
+      script: make check-in-container
+
+stages:
+  - pre-commit
+  - build
+  - test
