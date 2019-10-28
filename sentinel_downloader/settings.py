@@ -25,3 +25,4 @@ import os
 
 
 debug = os.getenv("SD_DEBUG", False)
+json_logs = os.getenv("JSON_LOGS", False)
