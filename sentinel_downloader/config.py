@@ -21,17 +21,15 @@
 # SOFTWARE.
 
 
-import logging
 from pathlib import Path
+from pprint import pformat
 
 from jsonschema import Draft4Validator, ValidationError
-from pprint import pformat
 from yaml import safe_load
 
-from sentinel_downloader.schema import CONFIG_SCHEMA
 from sentinel_downloader.constants import CONFIG_FILE_NAME
-
-logger = logging.getLogger(__name__)
+from sentinel_downloader.log import logger
+from sentinel_downloader.schema import CONFIG_SCHEMA
 
 
 class Config:

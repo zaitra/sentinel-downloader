@@ -86,6 +86,14 @@ $ pip3 install git+https://github.com/zaitra/sentinel-downloader
 sentinel-downloader download -c <PATH_TO_CONFIG_FILE>
 ```
 
+## Logging
+The default logging level is `INFO`. If you want to enable `DEBUG` logs,
+create `.env` file with variable `SD_DEBUG=1` and load it to your environment.
+```bash
+$ echo "SD_DEBUG=1" > .env
+$ source .env
+```
+
 # References
 
 This tool uses official [Sentinel hub python library](https://github.com/sentinel-hub/sentinelhub-py)

@@ -20,13 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import logging
 
 import click
 from pkg_resources import get_distribution
-from sentinel_downloader.cli.download import download
 
-logger = logging.getLogger("sentinel_downloader")
+from sentinel_downloader.cli.download import download
+from sentinel_downloader.log import logger
 
 
 @click.version_option(
