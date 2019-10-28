@@ -20,15 +20,44 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import structlog
+from structlog import get_logger
 
-import logging
-
-from sentinel_downloader.settings import debug
+from sentinel_downloader.settings import debug, json_logs
 
 
-logging_level = logging.INFO
-if debug:
-    logging_level = logging.DEBUG
+def configure_structlog():
+    json_processors = [
+        drop_debug_logs,
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.PositionalArgumentsFormatter(),
+        structlog.processors.TimeStamper("iso"),
+        structlog.processors.format_exc_info,
+        structlog.processors.UnicodeDecoder(),
+        structlog.processors.JSONRenderer(),
+    ]
+    pretty_print_processors = [
+        drop_debug_logs,
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.PositionalArgumentsFormatter(),
+        structlog.processors.ExceptionPrettyPrinter(),
+        structlog.processors.TimeStamper("iso"),
+        structlog.processors.UnicodeDecoder(),
+        structlog.dev.ConsoleRenderer(pad_event=0),
+    ]
+    structlog.configure(
+        processors=json_processors if json_logs else pretty_print_processors,
+        logger_factory=structlog.PrintLoggerFactory(),
+        wrapper_class=structlog.stdlib.BoundLogger,
+        context_class=structlog.threadlocal.wrap_dict(dict),
+    )
 
-logging.basicConfig(level=logging_level)
-logger = logging.getLogger("sentinel_downloader")
+
+def drop_debug_logs(_, level, event_dict):
+    if level == "debug" and not debug:
+        raise structlog.DropEvent
+    return event_dict
+
+
+configure_structlog()
+logger = get_logger(__name__)
