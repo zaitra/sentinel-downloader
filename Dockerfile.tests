@@ -1,4 +1,4 @@
-FROM docker.io/zaitra/sentinel-downloader:latest
+FROM docker.io/zaitra/sentinel-downloader:dev
 
 COPY files/recipe-tests.yaml /src/files/
 

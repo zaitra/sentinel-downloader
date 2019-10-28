@@ -1,4 +1,4 @@
-IMAGE := docker.io/zaitra/sentinel-downloader
+IMAGE := docker.io/zaitra/sentinel-downloader:dev
 TEST_IMAGE := docker.io/zaitra/sentinel-downloader-tests
 TEST_TARGET := ./tests/
 

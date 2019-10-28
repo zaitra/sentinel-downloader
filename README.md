@@ -1,38 +1,20 @@
 # Sentinel Downloader [![Build Status](https://travis-ci.com/zaitra/sentinel-downloader.svg?branch=master)](https://travis-ci.com/zaitra/sentinel-downloader)
 Library and CLI tool for downloading satellite images from the https://www.sentinel-hub.com/
 
-# Installation
+## Usage without installation
+
+If you want to use this tool you can easily do it with [published docker image](https://hub.docker.com/r/zaitra/sentinel-downloader):
 
 ```bash
-$ git clone https://github.com/zaitra/sentinel-downloader
-$ cd sentinel-downloader
-$ pip3 install .
+$ docker pull zaitra/sentinel-downloader
+$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -v <PATH_TO_CONFIG_FILE>:/.sd.yaml zaitra/sentinel-downloader bash -c "sentinel-downloader download -c /.sd.yaml"
 ```
-
-# Usage
-
-## CLI
-
-```bash
-sentinel-downloader download -c <PATH_TO_CONFIGURATION>
-```
-
-Configuration file is described in configuration section.
-
-
-## Docker
-
-If you want just try it out you can easily do it using docker:
-
-```bash
-$ docker run -it --rm -v /tmp/images:/tmp/images $(IMAGE) bash -c "sentinel-downloader download -c /src/.sd.yaml"
-```
-
-**Note:** You have to have your `sentinel-downloader` config `.sd.yaml` in the root directory of this project.
+* `<PATH_TO_IMAGES>` - directory where the images will be stored (absolute path on host)
+* `<PATH_TO_CONFIG_FILE>` - absolute path on host to configuration file `.sd.yaml`
 
 # Configuration
 
-**Configuration file contains sensitive data so it is recommended to keep it in private repository**.
+**Configuration file `.sd.yaml` contains sensitive data so it is recommended to keep it in private repository**.
 
 ## Example
 
@@ -71,6 +53,38 @@ Here are the configuration options:
 | `height`       | Image height | Yes |
 | `max_cloud_percentage`           | Max cloud coverage. Default is 1 | No |
 | `image_dir`                  | Path to directory where images should be saved. | Yes |
+
+# Docker
+
+## Installation
+
+```bash
+$ git clone https://github.com/zaitra/sentinel-downloader
+$ cd sentinel-downloader
+$ touch .sd.yaml  # configurarution file has to be in the root directory of this project
+$ vim .sd.yaml  # edit as described in Configuration section
+$ make build  # builds docker image
+```
+
+## Usage
+
+```bash
+$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images sd-image bash -c "sentinel-downloader download -c /src/.sd.yaml"
+```
+
+# CLI
+
+## Installation
+
+```bash
+$ pip3 install git+https://github.com/zaitra/sentinel-downloader
+```
+
+## Usage
+
+```bash
+sentinel-downloader download -c <PATH_TO_CONFIG_FILE>
+```
 
 # References
 
