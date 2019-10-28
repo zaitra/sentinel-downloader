@@ -20,6 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+Python interface for Sentinel downloader.
+"""
 
 import os
 import cv2
@@ -31,6 +34,9 @@ from sentinel_downloader.config import Config
 
 class SentinelDownloaderAPI:
     def __init__(self, config_path=None):
+        """
+        :param config_path: Path to configuration file.
+        """
         self.config = Config.get_config(config_path)
         self.bounding_box = BBox(bbox=self.config.bounding_box, crs=CRS.WGS84)
         self.custom_url_params = {
@@ -38,6 +44,21 @@ class SentinelDownloaderAPI:
         }  # remove SentinelHub logo
 
     def download(self):
+        """
+        Download images for time ranges provided in config file.
+        This method will create following directory structure:
+        project
+
+        └─── layer
+        │   └─── <time_from>_<time_to>
+        |           │   0.png
+        |           │   1.png
+        |   └─── <time_from>_<time_to>
+        |           │   0.png
+        |           │   1.png
+
+        :return: None
+        """
         for time in self.config.times:
             path = (
                 self.config.image_dir
@@ -54,6 +75,13 @@ class SentinelDownloaderAPI:
             self.download_image(time, path)
 
     def download_image(self, time, path=None):
+        """
+        Download images from single time range.
+        :param time: time range in format ('time_from', 'time_to')
+        :param path: path where to save images
+
+        :return: None
+        """
         request = WmsRequest(
             layer=self.config.layer,
             bbox=self.bounding_box,
@@ -79,6 +107,6 @@ class SentinelDownloaderAPI:
         save numpy array image to specific path
         :param image_array: Numpy array
         :param path: Path to save
-        :return:
+        :return: None
         """
         cv2.imwrite(path, image_array)

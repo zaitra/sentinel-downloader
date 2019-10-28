@@ -20,4 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""
+A place where constants lives.
+"""
+
 CONFIG_FILE_NAME = ".sd.yaml"
