@@ -21,17 +21,7 @@
 # SOFTWARE.
 
 
-import click
-
-from sentinel_downloader.api.api import SentinelDownloaderAPI
+import os
 
 
-@click.command("download")
-@click.option("-c", "--config", help="Path to sentinel-downloader configuration.")
-def download(config):
-    """
-    Download image(s) from sentinel-hub
-    """
-
-    api = SentinelDownloaderAPI(config)
-    api.download()
+debug = os.getenv("SD_DEBUG", False)

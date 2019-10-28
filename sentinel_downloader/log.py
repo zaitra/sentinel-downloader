@@ -21,17 +21,14 @@
 # SOFTWARE.
 
 
-import click
+import logging
 
-from sentinel_downloader.api.api import SentinelDownloaderAPI
+from sentinel_downloader.settings import debug
 
 
-@click.command("download")
-@click.option("-c", "--config", help="Path to sentinel-downloader configuration.")
-def download(config):
-    """
-    Download image(s) from sentinel-hub
-    """
+logging_level = logging.INFO
+if debug:
+    logging_level = logging.DEBUG
 
-    api = SentinelDownloaderAPI(config)
-    api.download()
+logging.basicConfig(level=logging_level)
+logger = logging.getLogger("sentinel_downloader")

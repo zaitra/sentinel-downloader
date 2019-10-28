@@ -1,5 +1,7 @@
 FROM docker.io/zaitra/sentinel-downloader:dev
 
+ENV SD_DEBUG=1
+
 COPY files/recipe-tests.yaml /src/files/
 
 RUN ansible-playbook -vv -c local -i localhost, /src/files/recipe-tests.yaml
