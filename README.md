@@ -93,6 +93,15 @@ create `.env` file with variable `SD_DEBUG=1` and load it to your environment.
 $ echo "SD_DEBUG=1" > .env
 $ source .env
 ```
+Since [structlog](http://www.structlog.org/en/stable/) is used for logging,
+you can have nice **colorized output** in the CLI. You just need to install [colorama](https://github.com/tartley/colorama).
+```bash
+$ pip3 install colorama
+```
+You can also switch between JSON logs renderer good for logs management services (enabled by `JSON_LOGS=1`) or console render.
+```bash
+$ echo "JSON_LOGS=1" >> .env
+```
 
 # References
 
