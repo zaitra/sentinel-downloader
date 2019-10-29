@@ -37,7 +37,7 @@ def sentinel_downloader_base():
     Download images from sentinel-hub with ease
     """
     sentinel_downloader_version = get_distribution("sentinel_downloader").version
-    logger.info(f"Sentinel-downloader {sentinel_downloader_version} is being used.")
+    logger.debug("Sentinel-downloader CLI started", version=sentinel_downloader_version)
 
 
 @click.command("version")

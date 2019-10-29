@@ -26,7 +26,6 @@ Sentinel downloader configuration.
 
 
 from pathlib import Path
-from pprint import pformat
 
 from jsonschema import Draft4Validator, ValidationError
 from yaml import safe_load
@@ -59,7 +58,7 @@ class Config:
         try:
             Draft4Validator(CONFIG_SCHEMA).validate(raw_dict)
         except ValidationError as ex:
-            logger.debug(f"{pformat(raw_dict)}")
+            logger.error("Provided configuration is not valid", **raw_dict)
             raise Exception(f"Provided configuration is not valid: {ex}.")
 
     @staticmethod
@@ -85,7 +84,7 @@ class Config:
         config.max_cloud_percentage = raw_dict.get("max_cloud_percentage", 1)
         config.image_dir = raw_dict.get("images_dir", None)
 
-        logger.debug(config.__dict__)
+        logger.debug("Loaded config", **config.__dict__)
 
         return config
 
@@ -104,12 +103,14 @@ class Config:
             # full path to config is provided from command line
             config_file_name_full = directory
 
-        logger.debug(f"Loading config from directory: {directory}")
+        logger.debug("Loading config", directory=directory)
 
         try:
             loaded_config = safe_load(open(config_file_name_full))
         except Exception as ex:
-            logger.error(f"Cannot load config '{config_file_name_full}'.")
+            logger.error(
+                "Cannot load config", config_file_name_full=config_file_name_full
+            )
             raise Exception(f"Cannot load config: {ex}.")
 
         return Config.get_from_dict(raw_dict=loaded_config)
