@@ -51,7 +51,7 @@ class Config:
     @staticmethod
     def validate(raw_dict: dict) -> None:
         """
-        Validate config file according to schema.py
+        Validate config file according to validation schema defined in schema.py file.
 
         :param raw_dict: dictionary with config options
         :return: None
