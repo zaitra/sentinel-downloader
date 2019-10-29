@@ -51,7 +51,7 @@ class Config:
     @staticmethod
     def validate(raw_dict: dict) -> None:
         """
-        validate config file according to schema.py
+        Validate config file according to schema.py
 
         :param raw_dict: dictionary with config options
         :return: None
@@ -65,7 +65,8 @@ class Config:
     @staticmethod
     def get_from_dict(raw_dict: dict, validate=True) -> "Config":
         """
-        Get Config object from python dict
+        Get Config object from python dict.
+
         :param raw_dict: Dict loaded from file
         :param validate: validate if config is correct according to schema in schema.py
         :return: Config
@@ -93,6 +94,7 @@ class Config:
     def get_config(path=None) -> "Config":
         """
         Load configuration file from provided path or current working directory.
+
         :param path: Absolute path to config file.
         :return: Config
         """
