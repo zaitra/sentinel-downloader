@@ -29,14 +29,17 @@ import cv2
 
 from sentinelhub import WmsRequest, CustomUrlParam, CRS, BBox
 
+from sentinel_downloader.api.exceptions import ExceptionMissingAccessToken
 from sentinel_downloader.config import Config
 from sentinel_downloader.log import logger
+from sentinel_downloader.settings import sentinel_hub_instance_id
 
 
 class SentinelDownloaderAPI:
 
     image_path_template = "{image_dir}{layer}/{date_from}-{date_to}/"
     image_name_template = "{path}{index}.png"
+    instance_id = sentinel_hub_instance_id
 
     def __init__(self, config_path=None):
         """
@@ -47,6 +50,16 @@ class SentinelDownloaderAPI:
         self.custom_url_params = {
             CustomUrlParam.SHOWLOGO: False
         }  # remove SentinelHub logo
+        self._check_access_token()
+
+    def _check_access_token(self):
+        """
+        Validate if access token is provided.
+
+        :return: None
+        """
+        if not self.instance_id:
+            raise ExceptionMissingAccessToken
 
     def download(self):
         """
@@ -94,7 +107,7 @@ class SentinelDownloaderAPI:
             width=self.config.width,
             height=self.config.height,  # photo dimensions
             custom_url_params=self.custom_url_params,
-            instance_id=self.config.instance_id,
+            instance_id=self.instance_id,
         )
 
         images = request.get_data()

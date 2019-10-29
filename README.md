@@ -1,5 +1,15 @@
 # Sentinel Downloader [![Build Status](https://travis-ci.com/zaitra/sentinel-downloader.svg?branch=master)](https://travis-ci.com/zaitra/sentinel-downloader)
-Library and CLI tool for downloading satellite images from the https://www.sentinel-hub.com/
+Library and CLI tool for downloading satellite images from the [sentinel-hub.com](https://sentinel-hub.com/)
+
+# Providing access to Sentinel Hub
+
+Sentinel Downloader is automation tool for downloading imagery from [sentinel-hub.com](https://sentinel-hub.com/).
+You need to have account in order to access the data and provide access token (instance ID) to start using this tool.
+Instance ID can be found in your dashboard in Configuration Utility section. Add your instance ID to your environment.
+```bash
+$ echo "export SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID>" >> .env
+$ source .env
+```
 
 ## Usage without installation
 
@@ -20,7 +30,6 @@ $ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -v <PATH_TO_CONFIG_FILE>:/
 
 ```yaml
 debug: true
-instance_id: "secret-token"
 layer: "TRUE-COLOR-S2-L1C"
 times:
   -  ["2015-05-01", "2015-08-30"]

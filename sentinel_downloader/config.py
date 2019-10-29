@@ -38,7 +38,6 @@ from sentinel_downloader.schema import CONFIG_SCHEMA
 class Config:
     def __init__(self):
         self.debug = False
-        self.instance_id = ""
         self.times = []
         self.layer = ""
         self.bounding_box = []
@@ -76,7 +75,6 @@ class Config:
         config = Config()
 
         config.debug = raw_dict.get("debug", False)
-        config.instance_id = raw_dict.get("instance_id", None)
         config.times = raw_dict.get("times", None)
         config.layer = raw_dict.get("layer", None)
         config.bounding_box = raw_dict.get("bounding_box", None)

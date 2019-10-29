@@ -29,3 +29,4 @@ import os
 
 debug = int(os.getenv("SD_DEBUG", False))
 json_logs = int(os.getenv("SD_JSON_LOGS", False))
+sentinel_hub_instance_id = os.getenv("SD_SENTINEL_INSTANCE_ID")

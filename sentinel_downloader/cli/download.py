@@ -24,6 +24,8 @@
 import click
 
 from sentinel_downloader.api.api import SentinelDownloaderAPI
+from sentinel_downloader.api.exceptions import ExceptionMissingAccessToken
+from sentinel_downloader.log import logger
 
 
 @click.command("download")
@@ -32,6 +34,9 @@ def download(config):
     """
     Download image(s) from sentinel-hub
     """
-
-    api = SentinelDownloaderAPI(config)
-    api.download()
+    try:
+        api = SentinelDownloaderAPI(config)
+        api.download()
+    except ExceptionMissingAccessToken:
+        logger.error("You need to provide access token to Sentinel Hub (instance ID)")
+        exit(1)

@@ -21,21 +21,10 @@
 # SOFTWARE.
 
 """
-Schema for config validation.
+Collection of Sentinel downloader API Exceptions.
 """
 
 
-CONFIG_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "debug": {"type": "boolean"},
-        "layer": {"type": "string"},
-        "times": {"type": "array"},
-        "bounding_box": {"type": "array"},
-        "width": {"type": "integer"},
-        "height": {"type": "integer"},
-        "max_cloud_percentage": {"type": "number"},
-        "images_dir": {"type": "string"},
-    },
-    "required": ["layer", "times", "bounding_box", "width", "height", "images_dir"],
-}
+class ExceptionMissingAccessToken(Exception):
+    def __str__(self):
+        return "Access token to Sentinel Hub (instance ID) is missing"
