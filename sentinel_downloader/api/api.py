@@ -64,7 +64,7 @@ class SentinelDownloaderAPI:
 
         :return: None
         """
-        logger.info("Download starts")
+        logger.info("Download has started")
         for time in self.config.times:
             path = self.image_path_template.format(
                 image_dir=self.config.image_dir,

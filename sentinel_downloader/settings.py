@@ -28,4 +28,4 @@ import os
 
 
 debug = int(os.getenv("SD_DEBUG", False))
-json_logs = int(os.getenv("JSON_LOGS", False))
+json_logs = int(os.getenv("SD_JSON_LOGS", False))
