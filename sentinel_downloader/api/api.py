@@ -81,9 +81,9 @@ class SentinelDownloaderAPI:
     def download_image(self, time, path=None):
         """
         Download images from single time range.
+
         :param time: time range in format ('time_from', 'time_to')
         :param path: path where to save images
-
         :return: None
         """
         request = WmsRequest(
