@@ -30,9 +30,14 @@ import cv2
 from sentinelhub import WmsRequest, CustomUrlParam, CRS, BBox
 
 from sentinel_downloader.config import Config
+from sentinel_downloader.log import logger
 
 
 class SentinelDownloaderAPI:
+
+    image_path_template = "{image_dir}{layer}/{date_from}-{date_to}/"
+    image_name_template = "{path}{index}.png"
+
     def __init__(self, config_path=None):
         """
         :param config_path: Path to configuration file.
@@ -59,19 +64,18 @@ class SentinelDownloaderAPI:
 
         :return: None
         """
+        logger.info("Download has started")
         for time in self.config.times:
-            path = (
-                self.config.image_dir
-                + self.config.layer
-                + "/"
-                + time[0]
-                + "_"
-                + time[1]
-                + "/"
+            path = self.image_path_template.format(
+                image_dir=self.config.image_dir,
+                layer=self.config.layer,
+                date_from=time[0],
+                date_to=time[1],
             )
             if not os.path.exists(path):
                 os.makedirs(path, exist_ok=True)
             time = tuple(time)
+            logger.info("Downloading images", date_range=time)
             self.download_image(time, path)
 
     def download_image(self, time, path=None):
@@ -93,11 +97,13 @@ class SentinelDownloaderAPI:
             instance_id=self.config.instance_id,
         )
 
-        if request.get_data():
-            images = request.get_data()
+        images = request.get_data()
+        if images:
             for index, image in enumerate(images):
                 if path:
-                    SentinelDownloaderAPI._save_image(image, path + str(index) + ".png")
+                    image_name = self.image_name_template.format(path=path, index=index)
+                    logger.info("Saving image", image=image_name)
+                    SentinelDownloaderAPI._save_image(image, image_name)
                 else:
                     raise Exception("Path to image folder does not exists!")
 

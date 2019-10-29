@@ -90,7 +90,7 @@ sentinel-downloader download -c <PATH_TO_CONFIG_FILE>
 The default logging level is `INFO`. If you want to enable `DEBUG` logs,
 create `.env` file with variable `SD_DEBUG=1` and load it to your environment.
 ```bash
-$ echo "SD_DEBUG=1" > .env
+$ echo "export SD_DEBUG=1" >> .env
 $ source .env
 ```
 Since [structlog](http://www.structlog.org/en/stable/) is used for logging,
@@ -98,9 +98,9 @@ you can have nice **colorized output** in the CLI. You just need to install [col
 ```bash
 $ pip3 install colorama
 ```
-You can also switch between JSON logs renderer good for logs management services (enabled by `JSON_LOGS=1`) or console render.
+You can also switch between JSON logs renderer good for logs management services (enabled by `SD_JSON_LOGS=1`) or console render.
 ```bash
-$ echo "JSON_LOGS=1" >> .env
+$ echo "export SD_JSON_LOGS=1" >> .env
 ```
 
 # References
