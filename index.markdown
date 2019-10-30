@@ -62,6 +62,6 @@ docker run -it --rm -v <CESTA_K_PRIECINKU>:/tmp/images \
 ```
 
 Kde musite nahradit nasledovne premenne:
-`<CESTA_K_PRIECINKU>` - nahradte cestou k priecinku kde chcete dáta stiahnut
-`<CESTA_KU_KONFIGURACNEMU_SUBORU>` - nahradte cestou ku konfiguracnemu suboru ktory sme vytvorili v predoslich krokoch.
+- `<CESTA_K_PRIECINKU>` - nahradte cestou k priecinku kde chcete dáta stiahnut
+- `<CESTA_KU_KONFIGURACNEMU_SUBORU>` - nahradte cestou ku konfiguracnemu suboru ktory sme vytvorili v predoslich krokoch.
 ``
