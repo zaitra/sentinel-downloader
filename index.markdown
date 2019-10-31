@@ -8,6 +8,16 @@ Sentinel Downloader je aplikácia postavená nad open-source knižnicou `sentine
 pre sťahovanie voľne prístupných dát zo satelitov z programov [Copernicus](https://scihub.copernicus.eu/) alebo [Landstat](https://landsat.gsfc.nasa.gov/).
 Hlavná výhoda používania aplikácie je jednoduchá konfigurácia a minimálna nutná znalosť programovania v Pythone.
 
+### Prečo sme vyvinuli Sentinel Downloader
+
+Ako tím sme súrene potrebovali pracovat s dátami ktoré treba buď to ručne sťahoavť alebo napísať pomerne [zdľhavý
+kód](https://sentinelhub-py.readthedocs.io/en/latest/examples/ogc_request.html). Pri sťahovaní je totiž nutné
+definovať rôzne parametre ktoré požadujete od výsledku. Sentinel Downloader dokáže stiahnuť požadované dáta
+jedným riadkom v termináli. 
+
+### Pre koho je aplikácia určená
+
+Aplikácia je určená najmä pre vývojárov v jayzku Python, ktorý potrebujú pracovat s dátami od [Copernicus](https://scihub.copernicus.eu/) alebo [Landstat](https://landsat.gsfc.nasa.gov/).
 
 ## Návod na použitie
 
