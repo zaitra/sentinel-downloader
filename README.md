@@ -4,12 +4,8 @@ Library and CLI tool for downloading satellite images from the [sentinel-hub.com
 # Providing access to Sentinel Hub
 
 Sentinel Downloader is automation tool for downloading imagery from [sentinel-hub.com](https://sentinel-hub.com/).
-You need to have account in order to access the data and provide access token (instance ID) to start using this tool.
-Instance ID can be found in your dashboard in Configuration Utility section. Add your instance ID to your environment.
-```bash
-$ echo "export SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID>" >> .env
-$ source .env
-```
+You need to have account in order to access the data and provide access token (**instance ID**) to start using this tool.
+Instance ID can be found in your dashboard in Configuration Utility section.
 
 ## Usage without installation
 
@@ -17,10 +13,11 @@ If you want to use this tool you can easily do it with [published docker image](
 
 ```bash
 $ docker pull zaitra/sentinel-downloader
-$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -v <PATH_TO_CONFIG_FILE>:/.sd.yaml zaitra/sentinel-downloader bash -c "sentinel-downloader download -c /.sd.yaml"
+$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -v <PATH_TO_CONFIG_FILE>:/.sd.yaml -e SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID> zaitra/sentinel-downloader bash -c "sentinel-downloader download -c /.sd.yaml"
 ```
 * `<PATH_TO_IMAGES>` - directory where the images will be stored (absolute path on host)
 * `<PATH_TO_CONFIG_FILE>` - absolute path on host to configuration file `.sd.yaml`
+* `<INSTANCE_ID>` - access token to Sentinel Hub (instance ID)
 
 # Configuration
 
@@ -54,7 +51,6 @@ Here are the configuration options:
 | Option                       | Description       | Required      |
 |------------------------------|-------------------|---------------|
 | `debug`            | Provide debug logs. Default is False | No |
-| `instance_id`           | Instance ID from sentinel-hub account | Yes |
 | `layer`               | Layer from sentinel-hub configuration | Yes |
 | `bounding_box`            | Bounding box location | Yes |
 | `times` | Array of time ranges | Yes |
@@ -78,10 +74,18 @@ $ make build  # builds docker image
 ## Usage
 
 ```bash
-$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images sd-image bash -c "sentinel-downloader download -c /src/.sd.yaml"
+$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -e SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID> sd-image bash -c "sentinel-downloader download -c /src/.sd.yaml"
 ```
 
 # CLI
+
+## Prepare environment
+
+Add your instance ID to your environment.
+```bash
+$ echo "export SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID>" >> .env
+$ source .env
+```
 
 ## Installation
 
