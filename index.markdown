@@ -10,32 +10,34 @@ Hlavná výhoda používania aplikácie je jednoduchá konfigurácia a minimáln
 
 ### Prečo sme vyvinuli Sentinel Downloader
 
-Ako tím sme súrene potrebovali pracovat s dátami ktoré treba buď to ručne sťahoavť alebo napísať pomerne [zdľhavý
-kód](https://sentinelhub-py.readthedocs.io/en/latest/examples/ogc_request.html). Pri sťahovaní je totiž nutné
+Ako tím sme potrebovali pracovat s dátami ktoré treba buď to ručne sťahovať alebo napísať pomerne [zdlhavý
+kód](https://sentinelhub-py.readthedocs.io/en/latest/examples/ogc_request.html) na ich získanie. Pri sťahovaní je totiž nutné
 definovať rôzne parametre ktoré požadujete od výsledku. Sentinel Downloader dokáže stiahnuť požadované dáta
-jedným riadkom v termináli. 
+jedným príkazom v termináli ihned po napisani prehľadného konfiguračného súboru.
 
 ### Pre koho je aplikácia určená
 
-Aplikácia je určená najmä pre vývojárov v jayzku Python, ktorý potrebujú pracovat s dátami od [Copernicus](https://scihub.copernicus.eu/) alebo [Landstat](https://landsat.gsfc.nasa.gov/).
+Aplikácia je určená všetkým ktorý chcú stahovať vačšie množstvo dát špecifických pre určitú oblasť na mape.
+Pomocou aplikaćie je možné stahovat dáta z programov [Copernicus](https://scihub.copernicus.eu/) alebo [Landstat](https://landsat.gsfc.nasa.gov/)
 
-## Návod na použitie
+#### Prípad užiti
 
-### Inštalácia
+Predstavme si že chceme zanalyzovať oblasť nízkych tatier. Chceme stiahnuť dáta z viacerých vrstiev ktoré nás zaujímajú (napriklád NDVI a True color).
+Taktiez chceme tieto data strukturovat podla casoveho obdobia. So sentinel downloader-om vieme toto spravit v troch jednoduchych krokoch:
 
-Balík môžeme nainštalovať pomocou nástroju [pip](https://packaging.python.org/tutorials/installing-packages/) nasledovným príkazom:
-
+1. Ulozime si pristupovy token zo sentinel-hub.com do premennej prostredia. Tento krok je nutny aby sa
+Sentinel downloader vedel autentizovat na API sentinel hub-u.
 ```shell
-$ pip3 install git+https://github.com/zaitra/sentinel-downloader
+$ export "export SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID>"
 ```
+- `<INSTANCE_ID>` - je potrebne nahradit tokenom ktory najdete v Configurtion sekcii po prihlaseni na [sentinel-hub.com](https://sentinel-hub.com/).
 
-### Konfiguracny subor
-
-## Ukazkovy konfiguracny subor
+2. vytvorime konfiguracny subor:
 
 ```yaml
-debug: true # zobrazit ladiace vystupy
-layer: "TRUE-COLOR-S2-L1C" # vrstvy zo satelitu ktore nas zaujimaju
+layers: # vrstvy zo satelitu ktore nas zaujimaju
+  - "TRUE-COLOR-S2-L1C" 
+  - "NDVI-S2-L1C" 
 times: # pole casovych obdobi
   -  ["2015-05-01", "2015-08-30"]
   -  ["2016-05-01", "2016-08-30"]
@@ -44,34 +46,23 @@ times: # pole casovych obdobi
   -  ["2019-05-01", "2019-08-30"]
 
 # Oblast na mape ktora nas zauijma. Suradnice su v poradi lavy horny roh (x,y) a pravy dolny roh (x,y)
-bounding_box: [14.42, 50.42, 14.42, 50.42]
+bounding_box: [19.46547813713551, 48.96805013122616, 19.57534141838551, 49.00685748937818]
 
-width: 42 # sirka obrazku v pixeloch
-height: 42 # vyska obrazku v pixeloch
+width: 1223 # sirka obrazku v pixeloch
+height: 658 # vyska obrazku v pixeloch
 
 max_cloud_percentage: 0.42 # maximalna oblacnost v percentach
 
 images_dir: "/tmp/images/" # priecinok kde maju byt obrazky stiahnute
 ```
 
-### Pouzitie
-
+3. spustime Sentinel Downloader:
 ```
 sentinel-downloader download -c <CESTA_KU_KONFIGURACNEMU_SUBORU>
 ```
 
-### Bez inštalácie (v docker kontajnery)
+Obrazky je nasledne mozne najst v priecinku ktory sme zadali v konfiguracii pod klucom `image_dir`.
 
-Sentinel downloader je mozne pouzit bez instalacie pomocou nastroju [docker](https://docs.docker.com/). Potom staci jediny prikaz:
+## Dokumentacia
 
-```shell
-docker run -it --rm -v <CESTA_K_PRIECINKU>:/tmp/images \
-                    -v <CESTA_KU_KONFIGURACNEMU_SUBORU>:/.sd.yaml \
-                    zaitra/sentinel-downloader \
-                    bash -c "sentinel-downloader download -c /.sd.yaml"
-```
-
-Kde musite nahradit nasledovne premenne:
-- `<CESTA_K_PRIECINKU>` - nahradte cestou k priecinku kde chcete dáta stiahnut
-- `<CESTA_KU_KONFIGURACNEMU_SUBORU>` - nahradte cestou ku konfiguracnemu suboru ktory sme vytvorili v predoslich krokoch.
-``
+Kompletnú technickú dokumentáciu je možné nájsť v [Github repozitari](https://github.com/zaitra/sentinel-downloader)
