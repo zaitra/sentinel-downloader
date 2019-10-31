@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## O aplikácii
+## O aplikaci
 
 Sentinel Downloader je aplikace postavená nad open-source knihovnou [sentinelhub-py](https://github.com/sentinel-hub/sentinelhub-py). 
 Aplikace je v jazyku Python a poskytuje rozhraní pro stahování volně přístupných dat ze satelitů v programu [Copernicus](https://scihub.copernicus.eu/) a [Landstat](https://landsat.gsfc.nasa.gov/). 
