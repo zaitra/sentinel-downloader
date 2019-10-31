@@ -1,7 +1,7 @@
 title: Sentinel Downloader
 email: info@zaitra.io
 description: >- # this means to ignore newlines until "baseurl:"
-  Knižnica a nástroj volaný z príkazového riadku na jednoduché sťahovanie satelitných dát zo www.sentinel-hub.com.
+  Aplikace na jednoduché stahování volně přístupných dat ze satelitů v programu Copernicus a Landstat.
 url: "zaitra.github.io/"
 
 # Build settings
