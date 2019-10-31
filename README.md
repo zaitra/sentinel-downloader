@@ -79,11 +79,12 @@ $ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -e SD_SENTINEL_INSTANCE_ID
 ```
 or use Makefile
 ```bash
-$ echo "export SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID>" >> .env
-$ source .env
-$ make build run-in-container
+$ make run-in-container INSTANCE_ID=<INSTANCE_ID> LOCAL_IMAGE_DIR=<PATH_TO_DOWNLOADS_FILE> CONFIG_FILE=<PATH_TO_CONFIG_FILE>
 ```
->Default path for downloaded images is `/tmp/images`. You can edit Dockerfile to change it.
+>Defaults are:  
+<PATH_TO_DOWNLOADS_FILE> = /tmp/images  
+<PATH_TO_CONFIG_FILE> = $(PWD)/.sd.yaml  
+<INSTANCE_ID> = exported Sentinel Instance Id into SD_SENTINEL_INSTANCE_ID env variable  
 
 # CLI
 
