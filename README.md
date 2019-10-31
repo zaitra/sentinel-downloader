@@ -79,10 +79,10 @@ $ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -e SD_SENTINEL_INSTANCE_ID
 ```
 or use Makefile
 ```bash
-$ make run-in-container INSTANCE_ID=<INSTANCE_ID> LOCAL_IMAGE_DIR=<PATH_TO_DOWNLOADS_FILE> CONFIG_FILE=<PATH_TO_CONFIG_FILE>
+$ make run-in-container INSTANCE_ID=<INSTANCE_ID> LOCAL_IMAGE_DIR=<PATH_TO_IMAGES> CONFIG_FILE=<PATH_TO_CONFIG_FILE>
 ```
 >Defaults are:  
-<PATH_TO_DOWNLOADS_FILE> = /tmp/images  
+<PATH_TO_IMAGES> = /tmp/images  
 <PATH_TO_CONFIG_FILE> = $(PWD)/.sd.yaml  
 <INSTANCE_ID> = exported Sentinel Instance Id into SD_SENTINEL_INSTANCE_ID env variable  
 
