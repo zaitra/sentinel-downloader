@@ -73,9 +73,17 @@ $ make build  # builds docker image
 
 ## Usage
 
+Run docker command
 ```bash
-$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -e SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID> sd-image bash -c "sentinel-downloader download -c /src/.sd.yaml"
+$ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -e SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID> zaitra/sentinel-downloader:dev bash -c "sentinel-downloader download -c /src/.sd.yaml"
 ```
+or use Makefile
+```bash
+$ echo "export SD_SENTINEL_INSTANCE_ID=<INSTANCE_ID>" >> .env
+$ source .env
+$ make build run-in-container
+```
+>Default path for downloaded images is `/tmp/images`. You can edit Dockerfile to change it.
 
 # CLI
 

@@ -1,12 +1,13 @@
 IMAGE := docker.io/zaitra/sentinel-downloader:dev
 TEST_IMAGE := docker.io/zaitra/sentinel-downloader-tests
 TEST_TARGET := ./tests/
+INSTANCE_ID=${SD_SENTINEL_INSTANCE_ID}
 
 build: files/install-deps.yaml
 	docker build --rm -t $(IMAGE) .
 
 run-in-container: build
-	docker run -it --rm -v /tmp/images:/tmp/images $(IMAGE) bash -c "sentinel-downloader download -c /src/.sd.yaml"
+	docker run -it --rm -v /tmp/images:/tmp/images -e SD_SENTINEL_INSTANCE_ID=$(INSTANCE_ID) $(IMAGE) bash -c "sentinel-downloader download -c /src/.sd.yaml"
 
 test-image: build
 	docker build --rm -t $(TEST_IMAGE) -f Dockerfile.tests .
