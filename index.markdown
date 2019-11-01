@@ -10,7 +10,7 @@ Velkou výhodou aplikace je jednoduchá konfigurace a minimální nutná znalost
 
 ### Proč jsme vyvinuli Sentinel Downloader?
 
-Potřebovali jsme jako tým během hackathonu pracovat s daty, které bylo možné buď stahovat ručně, nebo pomocí [poměrně zdlouhavého kódu]((https://sentinelhub-py.readthedocs.io/en/latest/examples/ogc_request.html)). 
+Potřebovali jsme jako tým během hackathonu pracovat s daty, které bylo možné buď stahovat ručně, nebo pomocí [poměrně zdlouhavého kódu](https://sentinelhub-py.readthedocs.io/en/latest/examples/ogc_request.html). 
 Při stahování samotném je totiž nutné nadefinovat vícero parametrů, které požadujete od výsledku. Sentinel Downloader dokáže stáhnout požadovaná data jedním příkazem v terminálu, a to ihned po napsaní přehledného konfiguračního souboru.
 
 
