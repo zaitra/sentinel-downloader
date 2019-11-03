@@ -1,5 +1,7 @@
 debug: true
-layer: "layer1"
+layers:
+  - "TRUE-COLOR"
+  - "NDVI"
 times:
   -  ["2015-05-01", "2015-08-30"]
   -  ["2016-05-01", "2016-08-30"]

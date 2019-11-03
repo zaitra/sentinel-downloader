@@ -29,7 +29,7 @@ CONFIG_SCHEMA = {
     "type": "object",
     "properties": {
         "debug": {"type": "boolean"},
-        "layer": {"type": "string"},
+        "layers": {"type": "array"},
         "times": {"type": "array"},
         "bounding_box": {"type": "array"},
         "width": {"type": "integer"},
@@ -37,5 +37,5 @@ CONFIG_SCHEMA = {
         "max_cloud_percentage": {"type": "number"},
         "images_dir": {"type": "string"},
     },
-    "required": ["layer", "times", "bounding_box", "width", "height", "images_dir"],
+    "required": ["layers", "times", "bounding_box", "width", "height", "images_dir"],
 }
