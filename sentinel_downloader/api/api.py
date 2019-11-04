@@ -78,18 +78,19 @@ class SentinelDownloaderAPI:
         :return: None
         """
         logger.info("Download has started")
-        for time in self.config.times:
-            path = self.image_path_template.format(
-                image_dir=self.config.image_dir,
-                layer=self.config.layer,
-                date_from=time[0],
-                date_to=time[1],
-            )
-            if not os.path.exists(path):
-                os.makedirs(path, exist_ok=True)
-            time = tuple(time)
-            logger.info("Downloading images", date_range=time)
-            self.download_image(time, path)
+        for layer in self.config.layers:
+            for time in self.config.times:
+                path = self.image_path_template.format(
+                    image_dir=self.config.image_dir,
+                    layer=layer,
+                    date_from=time[0],
+                    date_to=time[1],
+                )
+                if not os.path.exists(path):
+                    os.makedirs(path, exist_ok=True)
+                time = tuple(time)
+                logger.info("Downloading images", date_range=time)
+                self.download_image(time, path)
 
     def download_image(self, time, path=None):
         """

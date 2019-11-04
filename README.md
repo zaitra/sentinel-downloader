@@ -27,7 +27,8 @@ $ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -v <PATH_TO_CONFIG_FILE>:/
 
 ```yaml
 debug: true
-layer: "TRUE-COLOR-S2-L1C"
+layers:
+  - "TRUE-COLOR-S2-L1C"
 times:
   -  ["2015-05-01", "2015-08-30"]
   -  ["2016-05-01", "2016-08-30"]
@@ -51,7 +52,7 @@ Here are the configuration options:
 | Option                       | Description       | Required      |
 |------------------------------|-------------------|---------------|
 | `debug`            | Provide debug logs. Default is False | No |
-| `layer`               | Layer from sentinel-hub configuration | Yes |
+| `layers`               | List of layers from sentinel-hub configuration | Yes |
 | `bounding_box`            | Bounding box location | Yes |
 | `times` | Array of time ranges | Yes |
 | `width`              | Image width | Yes |
@@ -127,4 +128,4 @@ $ echo "export SD_JSON_LOGS=1" >> .env
 
 # References
 
-This tool uses official [Sentinel hub python library](https://github.com/sentinel-hub/sentinelhub-py)
+This tool uses official [Sentinel hub python library](https://github.com/sentinel-hub/sentinelhub-py).

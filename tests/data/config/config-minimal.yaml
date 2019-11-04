@@ -1,4 +1,5 @@
-layer: "layer1"
+layers:
+  - "TRUE-COLOR"
 times:
   -  ["2015-05-01", "2015-08-30"]
 

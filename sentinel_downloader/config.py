@@ -39,7 +39,7 @@ class Config:
     def __init__(self):
         self.debug = False
         self.times = []
-        self.layer = ""
+        self.layers = []
         self.bounding_box = []
         self.width = 0
         self.height = 0
@@ -76,7 +76,7 @@ class Config:
 
         config.debug = raw_dict.get("debug", False)
         config.times = raw_dict.get("times", None)
-        config.layer = raw_dict.get("layer", None)
+        config.layers = raw_dict.get("layers", None)
         config.bounding_box = raw_dict.get("bounding_box", None)
         config.width = raw_dict.get("width", 400)
         config.height = raw_dict.get("height", 400)
