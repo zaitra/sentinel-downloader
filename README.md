@@ -21,8 +21,6 @@ $ docker run -it --rm -v <PATH_TO_IMAGES>:/tmp/images -v <PATH_TO_CONFIG_FILE>:/
 
 # Configuration
 
-**Configuration file `.sd.yaml` contains sensitive data so it is recommended to keep it in private repository**.
-
 ## Example
 
 ```yaml
