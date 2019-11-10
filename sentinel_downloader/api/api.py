@@ -89,19 +89,20 @@ class SentinelDownloaderAPI:
                 if not os.path.exists(path):
                     os.makedirs(path, exist_ok=True)
                 time = tuple(time)
-                logger.info("Downloading images", date_range=time)
-                self.download_image(time, path)
+                logger.info("Downloading images", date_range=time, layer=layer)
+                self.download_image(time, layer, path)
 
-    def download_image(self, time, path=None):
+    def download_image(self, time, layer, path=None):
         """
         Download images from single time range.
 
         :param time: time range in format ('time_from', 'time_to')
+        :param layer: layer from sentinel-hub configuration
         :param path: path where to save images
         :return: None
         """
         request = WmsRequest(
-            layer=self.config.layer,
+            layer=layer,
             bbox=self.bounding_box,
             time=time,  # download from this time ranges
             maxcc=self.config.max_cloud_percentage,
