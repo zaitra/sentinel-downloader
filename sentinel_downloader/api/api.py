@@ -25,9 +25,9 @@ Python interface for Sentinel downloader.
 """
 
 import os
-import cv2
 
-from sentinelhub import WmsRequest, CustomUrlParam, CRS, BBox
+import cv2
+from sentinelhub import WmsRequest, CustomUrlParam, CRS, BBox, WcsRequest
 
 from sentinel_downloader.api.exceptions import ExceptionMissingAccessToken
 from sentinel_downloader.config import Config
@@ -92,25 +92,66 @@ class SentinelDownloaderAPI:
                 logger.info("Downloading images", date_range=time, layer=layer)
                 self.download_image(time, layer, path)
 
+    def create_wms_request(self, time, layer):
+        """
+        Create Sentinel Hub WMS (Web Map Service) get map request.
+
+        If one of the photo resolution (width or height) is not specified,
+        it would be set automatically in a way that image would best fit bounding box ratio.
+
+        :param time: time range in format ('time_from', 'time_to')
+        :param layer: layer from sentinel-hub configuration
+        :return: obj WmsRequest
+        """
+        return WmsRequest(
+            layer=layer,
+            bbox=self.bounding_box,
+            time=time,
+            maxcc=self.config.max_cloud_percentage,
+            width=self.config.width if self.config.width else None,
+            height=self.config.height if self.config.height else None,
+            custom_url_params=self.custom_url_params,
+            instance_id=self.instance_id,
+        )
+
+    def create_wcs_request(self, time, layer):
+        """
+        Create Sentinel Hub WCS (Web Coverage Service) get map request.
+
+        Used for getting image in highest resolution - 10 metres per pixel.
+
+        :param time: time range in format ('time_from', 'time_to')
+        :param layer: layer from sentinel-hub configuration
+        :return: obj WcsRequest
+        """
+        return WcsRequest(
+            layer=layer,
+            bbox=self.bounding_box,
+            time=time,
+            maxcc=self.config.max_cloud_percentage,
+            resx="10m",
+            resy="10m",
+            custom_url_params=self.custom_url_params,
+            instance_id=self.instance_id,
+        )
+
     def download_image(self, time, layer, path=None):
         """
         Download images from single time range.
+
+        If no photo resolution is specified, the highest resolution will be used.
 
         :param time: time range in format ('time_from', 'time_to')
         :param layer: layer from sentinel-hub configuration
         :param path: path where to save images
         :return: None
         """
-        request = WmsRequest(
-            layer=layer,
-            bbox=self.bounding_box,
-            time=time,  # download from this time ranges
-            maxcc=self.config.max_cloud_percentage,
-            width=self.config.width,
-            height=self.config.height,  # photo dimensions
-            custom_url_params=self.custom_url_params,
-            instance_id=self.instance_id,
-        )
+        if self.config.width or self.config.height:
+            # wms request for using specific resolution
+            request = self.create_wms_request(time=time, layer=layer)
+        else:
+            # wcs request for using highest resolution
+            request = self.create_wcs_request(time=time, layer=layer)
 
         images = request.get_data()
         if images:

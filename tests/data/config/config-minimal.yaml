@@ -6,7 +6,4 @@ times:
 # area of interest. Coordinates representing top left x,y and right bottom x,y
 bounding_box: [14.42, 50.42, 14.42, 50.42]
 
-width: 42
-height: 42
-
 images_dir: "/tmp/images/"

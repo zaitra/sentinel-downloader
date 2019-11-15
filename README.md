@@ -53,10 +53,14 @@ Here are the configuration options:
 | `layers`               | List of layers from sentinel-hub configuration | Yes |
 | `bounding_box`            | Bounding box location | Yes |
 | `times` | Array of time ranges | Yes |
-| `width`              | Image width | Yes |
-| `height`       | Image height | Yes |
+| `width`              | Image width | No |
+| `height`       | Image height | No |
 | `max_cloud_percentage`           | Max cloud coverage. Default is 1 | No |
 | `image_dir`                  | Path to directory where images should be saved. | Yes |
+
+If image width and height are not specified, the highest resolution will be used.
+If one of the photo resolution (width or height) is not specified,
+it would be set automatically in a way that image would best fit bounding box ratio.
 
 # Docker
 

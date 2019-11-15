@@ -78,8 +78,8 @@ class Config:
         config.times = raw_dict.get("times", None)
         config.layers = raw_dict.get("layers", None)
         config.bounding_box = raw_dict.get("bounding_box", None)
-        config.width = raw_dict.get("width", 400)
-        config.height = raw_dict.get("height", 400)
+        config.width = raw_dict.get("width", None)
+        config.height = raw_dict.get("height", None)
         config.max_cloud_percentage = raw_dict.get("max_cloud_percentage", 1)
         config.image_dir = raw_dict.get("images_dir", None)
 
